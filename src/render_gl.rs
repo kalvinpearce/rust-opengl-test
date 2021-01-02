@@ -19,6 +19,10 @@ impl Shader {
     pub fn from_frag_source(source: &CStr) -> Result<Shader, String> {
         Shader::from_source(source, gl::FRAGMENT_SHADER)
     }
+
+    pub fn id(&self) -> gl::types::GLuint {
+        self.id
+    }
 }
 
 impl Drop for Shader {
