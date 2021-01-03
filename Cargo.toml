@@ -13,5 +13,8 @@ gl = { path = "lib/gl" }
 version = "0.34.3"
 features = ["bundled", "static-link"]
 
+[build-dependencies]
+walkdir = "2.3.1"
+
 [features]
 gl_debug = ["gl/debug"]
