@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 extern crate gl;
 extern crate nalgebra;
 extern crate sdl2;
