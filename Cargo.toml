@@ -10,6 +10,7 @@ edition = "2018"
 gl = { path = "lib/gl" }
 render_gl_derive = { path = "render_gl_derive" }
 failure = "0.1.8"
+vec-2-10-10-10 = "0.1.2"
 
 [dependencies.sdl2]
 version = "0.34.3"
