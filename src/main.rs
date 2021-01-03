@@ -1,10 +1,11 @@
 extern crate gl;
+extern crate nalgebra;
 extern crate sdl2;
+extern crate vec_2_10_10_10;
 #[macro_use]
 extern crate failure;
 #[macro_use]
 extern crate render_gl_derive;
-extern crate vec_2_10_10_10;
 
 mod debug;
 pub mod render_gl;
@@ -12,18 +13,9 @@ pub mod resources;
 mod triangle;
 
 use failure::err_msg;
-use render_gl::data;
+use nalgebra as na;
 use resources::Resources;
 use std::path::Path;
-
-#[derive(VertexAttribPointers, Copy, Clone, Debug)]
-#[repr(C, packed)]
-struct Vertex {
-    #[location = 0]
-    pos: data::f32_f32_f32,
-    #[location = 1]
-    clr: data::u2_u10_u10_u10_rev_float,
-}
 
 fn main() {
     if let Err(e) = run() {
@@ -52,14 +44,11 @@ fn run() -> Result<(), failure::Error> {
     });
 
     let mut viewport = render_gl::Viewport::for_window(900, 700);
-
-    unsafe {
-        gl.ClearColor(0.3, 0.3, 0.5, 1.0);
-    }
-
+    let color_buffer = render_gl::ColorBuffer::from_color(na::Vector3::new(0.3, 0.3, 0.5));
     let triangle = triangle::Triangle::new(&res, &gl)?;
 
     viewport.set_used(&gl);
+    color_buffer.set_used(&gl);
 
     let mut event_pump = sdl.event_pump().map_err(err_msg)?;
     'main: loop {
@@ -77,10 +66,7 @@ fn run() -> Result<(), failure::Error> {
             }
         }
 
-        unsafe {
-            gl.Clear(gl::COLOR_BUFFER_BIT);
-        }
-
+        color_buffer.clear(&gl);
         triangle.render(&gl);
 
         window.gl_swap_window();
