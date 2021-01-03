@@ -98,9 +98,7 @@ dependencies = [
 
 [[package]]
 name = "gl"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81457bb802910ad5b535eb48541c51830a761804aa5b7087adbc9d049aa57aca"
+version = "0.1.0"
 dependencies = [
  "gl_generator",
 ]
