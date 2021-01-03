@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 gl = { path = "lib/gl" }
+render_gl_derive = { path = "render_gl_derive" }
 failure = "0.1.8"
 
 [dependencies.sdl2]
